@@ -46,7 +46,7 @@ const operations = {
 }
 
 const buildNode = (operandOrNumber: any, array: string[]): MyNode => {
-  if (Object.keys(operations).some(q=>q === operandOrNumber)) {
+  if (operations[node.value]) {
     return {
       value: operandOrNumber,
       right: buildNode(array.pop(),array),
