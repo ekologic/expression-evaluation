@@ -60,7 +60,7 @@ const buildNode = (operandOrNumber: any, array: string[]): MyNode => {
 }
 
 const calculate = (node:MyNode):number => {
-  if (Object.keys(operations).some(q=>q === node.value)) {
+  if (operations[node.value]) {
     return operations[node.value](node.left,node.right);
   }
   return node.value;
