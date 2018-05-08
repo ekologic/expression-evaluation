@@ -19,7 +19,7 @@ describe('Challenge', function () {
   })
 
   it('should support evaluate this operation right', function() {
-    expect(calculate('3 2 1 - *') === 3)
+    expect(calculate('3 2 1 - *')).toBe(3)
   })
   it('should support evaluate this operation right', function() {
     expect(calculate('7 4 5 + * 3 - 10 /') === 6)
@@ -36,7 +36,7 @@ const calculate = (str: string) => {
   }
   
   const root:MyNode = buildNode(items.pop(),items);
-  return calculate(root);
+  return calculate1(root);
 }
 const operations = {
   '+' : (a:number,b:number) => a + b,
@@ -46,7 +46,7 @@ const operations = {
 }
 
 const buildNode = (operandOrNumber: any, array: string[]): MyNode => {
-  if (operations[node.value]) {
+  if (operations[operandOrNumber]) {
     return {
       value: operandOrNumber,
       right: buildNode(array.pop(),array),
@@ -56,9 +56,9 @@ const buildNode = (operandOrNumber: any, array: string[]): MyNode => {
   return { value: operandOrNumber};
 }
 
-const calculate = (node:MyNode):number => {
+const calculate1 = (node:MyNode):number => {
   if (operations[node.value]) {
-    return operations[node.value](node.left,node.right);
+    return operations[node.value](calculate1(node.left),calculate1(node.right));
   }
   return node.value;
 }
