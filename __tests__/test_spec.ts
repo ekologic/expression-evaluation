@@ -34,11 +34,8 @@ const calculate = (str: string) => {
   if (items.length <= 3) {
     return items[items.length - 1];
   }
-  const root: MyNode = {
-    value: items.pop(),
-    left: buildNode(items.pop(),items),
-    right: buildNode(items.pop(),items)
-  }
+  
+  const root:MyNode = buildNode(items.pop(),items);
   return calculate(root);
 }
 const operations = {
