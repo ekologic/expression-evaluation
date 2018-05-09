@@ -42,7 +42,7 @@ const calculate = (str: string) => {
   const result = Number(calculate1(root))
   return Number.isNaN(result) ? 0 : result;
 }
-const operations = {
+const operations:any = {
   '+' : (a:number,b:number) => Number(a) + Number(b),
   '*' : (a:number,b:number) => Number(a) * Number(b),
   '-' : (a:number,b:number) => Number(a) - Number(b),
@@ -50,7 +50,7 @@ const operations = {
 }
 
 const buildNode = (operandOrNumber: any, array: string[]): MyNode => {
-  if (operations[operandOrNumber]) {
+  if (operandOrNumber in operations) {
     return {
       value: operandOrNumber,
       right: buildNode(array.pop(),array),
@@ -61,8 +61,8 @@ const buildNode = (operandOrNumber: any, array: string[]): MyNode => {
 }
 
 const calculate1 = (node:MyNode):number => {
-  if (operations[node.value]) {
-    return operations[node.value](calculate1(node.left),calculate1(node.right));
+  if (node.value in operations) {
+    return operations[node.value](calculate1(node.left as MyNode),calculate1(node.right as MyNode));
   }
   return node.value;
 }
